@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  background-color: #000;
+  font-family: "Inter", sans-serif;
+}
+
+.screen-max-width {
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  position: relative;
+  max-width: 1120px;
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(
+    0deg,
+    rgb(89, 89, 89) 0%,
+    rgb(255, 255, 255) 100%
+  );
+  /* display: inline-block; */
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility bg-blur {
+  background-color: #2a2a2a;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  /* border: 1px solid rgba(255, 255, 255, 0.18); */
+}
+@utility bg-blur-log {
+  /* background: rgba(255, 255, 255, 0); */
+  background-color: rgba(211, 211, 211, 0.34);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #101010;
+  /* background: transparent;  */
+  /* background: theme('bg-primary'); */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #383838;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #232323;
+}
+
+@utility nav-height {
+  @apply h-[calc(100vh-49px)];
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility background-radial-class {
+  background: rgb(145, 145, 145);
+  background: radial-gradient(
+    circle at center,
+    rgba(145, 145, 145, 1) 0%,
+    rgba(123, 123, 123, 1) 8%,
+    rgba(92, 92, 92, 1) 26%,
+    rgba(63, 63, 63, 1) 49%,
+    rgba(55, 55, 55, 1) 57%,
+    rgba(35, 35, 35, 1) 80%,
+    rgba(14, 14, 14, 1) 100%
+  );
+}
+
+@theme {
+  --color-gray: "#7f8188";
+}
+
+@layer components {
+  #header {
+    @apply fixed z-[9999] h-16 w-full sm:p-4;
+
+    nav {
+      @apply mx-auto flex h-16 w-full items-center justify-between bg-white/10 px-4 ring-1 ring-white/17 backdrop-blur-xl sm:rounded-full md:max-w-4xl;
+
+      .logo {
+        @apply flex w-12 justify-between rounded-full bg-white/15 ring-1 ring-white/19 max-sm:size-10 sm:-translate-x-1;
+
+        img {
+          @apply max-sm:size-10;
+        }
+      }
+
+      .nav-links {
+        @apply flex w-1/3 justify-between gap-10 max-md:hidden;
+      }
+
+      .date {
+        @apply text-sm text-white max-md:hidden;
+      }
+
+      .toggle-menu-btn {
+        @apply rounded-2xl px-2 py-1 ring ring-white md:hidden;
+      }
+    }
+
+    .menu {
+      @apply fixed top-20 left-4.5 mx-auto h-96 w-[90%] overflow-hidden rounded-2xl bg-white/15 ring-1 ring-white/20 backdrop-blur-2xl sm:top-32;
+
+      ul {
+        @apply flex h-full flex-col items-center justify-center gap-10 text-5xl font-light;
+      }
+    }
+  }
+
+  #hero {
+    @apply relative w-full overflow-hidden;
+    @apply max-sm:pt-8; /* test padding for gradient background container in mobile*/
+
+    .title {
+      @apply absolute top-40 z-10 w-full text-center;
+      @apply max-sm:left-10 max-sm:w-[80%] max-sm:overflow-hidden max-sm:rounded-lg;
+
+      h1 {
+        @apply text-4xl leading-snug font-light text-white;
+        @apply md:text-gradient md:text-5xl;
+      }
+
+      p {
+        @apply text-lg font-light text-white;
+        @apply md:text-gradient md:text-3xl/12;
+      }
+    }
+
+    .content {
+      @apply relative flex h-[80vh] w-full items-center justify-center sm:pt-36 md:h-lvh;
+
+      #profession-name {
+        @apply pointer-events-none z-10;
+        @apply max-sm:left-10 max-sm:w-[80%] max-sm:overflow-hidden max-sm:rounded-lg max-sm:p-1 max-sm:backdrop-blur-2xl md:mix-blend-difference;
+
+        h2 {
+          @apply text-5xl font-light text-white;
+          @apply max-sm:text-center;
+          @apply sm:text-6xl sm:font-extralight;
+          @apply md:text-gradient md:text-8xl ;
+          @apply lg:text-9xl;
+        }
+      }
+
+      /* Mobile background */
+      .background {
+        @apply absolute mx-auto h-[70%] w-[90%] overflow-hidden rounded-2xl md:hidden;
+      }
+
+      #spline-3d-cube {
+        @apply absolute h-[80%] w-full;
+        @apply max-md:hidden;
+      }
+    }
+  }
+
+  #projects {
+    .projects-title {
+      @apply text-gradient p-2 text-center text-5xl;
+    }
+
+    .project-card {
+      @apply w-full px-6 sm:px-4 md:w-full;
+    }
+  }
+
+  #about {
+    @apply relative mt-10 flex h-full w-full flex-col items-center justify-between gap-8 px-8 text-white sm:flex-row md:mt-30 md:items-start;
+
+    .profile-img {
+      @apply w-full max-w-2xs overflow-hidden rounded-4xl;
+    }
+
+    .about-content {
+      @apply flex w-full flex-col justify-between gap-4 max-sm:items-center sm:min-h-96;
+
+      p {
+        @apply text-xl/8 font-light text-balance text-white md:text-3xl;
+      }
+    }
+  }
+
+  #contact {
+    @apply flex h-[700px] flex-col justify-between gap-10 rounded-2xl bg-[url(/background-gradient-img.avif)] bg-cover bg-center bg-no-repeat px-10 py-20 text-white;
+
+    @apply max-xl:mt-20 max-lg:mx-8 max-sm:mx-4 max-sm:h-96 max-sm:px-10 max-sm:py-10;
+
+    h2 {
+      @apply text-center text-2xl font-light;
+      @apply sm:text-7xl md:text-left md:text-8xl;
+
+      span {
+        @apply font-medium;
+      }
+    }
+
+    .contact-content {
+      @apply flex flex-col items-center gap-4;
+      @apply md:items-end;
+
+      div {
+        @apply flex flex-col gap-1 text-sm;
+        @apply sm:text-lg md:flex-row md:items-center md:text-xl lg:text-2xl;
+
+        p {
+          @apply max-sm:text-[17px];
+        }
+
+        button {
+          @apply cursor-pointer font-bold underline-offset-[6px] hover:underline active:underline;
+        }
+      }
+    }
+  }
+
+  #footer {
+    @apply mt-10 w-full bg-[#1E1D1C] text-[#6D6D6C];
+    p {
+      @apply pt-10 text-center text-lg text-white;
+      @apply md:text-3xl;
+    }
+
+    .links-container {
+      @apply mx-auto flex justify-evenly gap-6 px-14 py-10 sm:w-5xl;
+
+      .links {
+        @apply flex flex-col items-center gap-4 font-light;
+      }
+    }
+  }
+}
