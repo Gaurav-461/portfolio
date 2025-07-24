@@ -3,13 +3,13 @@ import { Hero, Projects, ElasticSvgLine, About, Contact } from "../components/in
 const Home = () => {
   return (
     <>
-      <section className="max-w-5xl mx-auto">
+      <main className="mx-auto lg:w-5xl">
         <Hero />
         <Projects />
         <About />
         <ElasticSvgLine />
         <Contact />
-      </section>
+      </main>
     </>
   );
 };
