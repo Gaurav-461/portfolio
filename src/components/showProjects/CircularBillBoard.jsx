@@ -16,7 +16,7 @@ const CircularBillBoard = () => {
         <EffectComposer>
           <Bloom
             mipmapBlur
-            intensity={0.27}
+            intensity={0.13}
             luminanceThreshold={0}
             luminanceSmoothing={0}
           />
