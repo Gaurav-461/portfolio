@@ -1,11 +1,15 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/all";
+import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const About = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  useGSAP(() => {
+
+  const vdRef = useRef(null);
+
+  const { contextSafe } = useGSAP(() => {
     const start = isMobile ? "center 70%" : "top 80%";
 
     const splitText = SplitText.create(".about", {
@@ -16,29 +20,50 @@ const About = () => {
       scrollTrigger: {
         trigger: ".profile-img",
         start: "top 80%",
-        // markers: true,
       },
       filter: "blur(30px)",
       opacity: 0,
-      duration: 0.5,
+      duration: 1,
+      ease: "power1.inOut"
     });
 
     gsap.from(splitText.lines, {
       scrollTrigger: {
         trigger: ".about-section",
         start: start,
-        // markers: true,
       },
       filter: "blur(30px)",
       yPercent: 100,
       opacity: 0,
       y: -100,
       rotation: "random(-80, 80)",
-      duration: 0.8,
-      ease: "back",
-      stagger: 0.15,
+      duration: 1.7,
+      ease: "back.inOut",
+      stagger: 0.2,
     });
   });
+
+  const handleOnMouseMove = contextSafe(() => {
+    if(!vdRef.current) return
+
+    gsap.to(vdRef.current, {
+      xPercent: -50,
+      yPercent: -10,
+      rotate: 30,
+    })
+  })
+  
+  const handleOnMouseLeave = contextSafe(() => {
+    if(!vdRef.current) return
+
+    gsap.to(vdRef.current, {
+      xPercent: 0,
+      yPercent: 0,
+      rotate: -15,
+      ease: "power1.inOut"
+    })
+  })
+  
   return (
     <section id="about" className="about-section">
       {/* Profile Image */}
@@ -52,6 +77,7 @@ const About = () => {
 
       {/* Hello video */}
       <video
+        ref={vdRef}
         src="/hello-text-video.mp4"
         autoPlay
         loop
@@ -61,7 +87,7 @@ const About = () => {
       />
 
       {/* About */}
-      <div className="about-content">
+      <div className="about-content" onMouseMove={handleOnMouseMove} onMouseLeave={handleOnMouseLeave}>
         <p className="about">
           Hi, I'm <span className="font-medium">Gaurav</span>, a web developer
           who loves crafting engaging digital experiences. My approach blends
