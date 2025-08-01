@@ -9,13 +9,13 @@ const ElasticSvgLine = () => {
     const initialPath = "M 10 100 Q 250 100 1040 100";
     const finalPath = "M 10 100 Q 250 100 1040 100";
 
-    useGSAP(() => {
+    useGSAP((context, contextSafe) => {
         const svg = svgRef.current;
         const path = pathRef.current;
 
         if (!svg || !path) return;
 
-        const updatePath = (e) => {
+        const updatePath = contextSafe((e) => {
             const rect = svg.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -24,15 +24,15 @@ const ElasticSvgLine = () => {
                 duration: 1,
                 ease: "elastic.out(1,0.3)"
             });
-        };
+        });
 
-        const resetPath = () => {
+        const resetPath = contextSafe(() => {
             gsap.to(path, {
                 attr: { d: finalPath },
                 duration: 1.6,
                 ease: "elastic.out(1,0.3)"
             });
-        };
+        });
 
         svg.addEventListener("mousemove", updatePath);
         svg.addEventListener("mouseleave", resetPath);
