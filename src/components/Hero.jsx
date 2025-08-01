@@ -1,24 +1,27 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Suspense, useRef } from "react";
+import { lazy, Suspense, useRef } from "react";
 import Loading from "./Loading.jsx";
-import Spline from "@splinetool/react-spline";
 import { Velustro } from "uvcanvas";
+
+const SplineBox = lazy(() => import("./3dModels/SplineBox.jsx"))
 
 const Hero = () => {
   const heroSectionRef = useRef(null);
+
   useGSAP(() => {
     let tl = gsap.timeline({
-      delay: 1.2,
+      delay: 2,
     });
 
     tl.from(".title, .name", {
       y: 50,
       opacity: 0,
-      stagger: 0.1,
+      stagger: 0.2,
+      ease: "power1.inOut"
     }, "a")
       .from("#spline-3d-cube", {
-        y: 50,
+        // y: 50,
         opacity: 0,
       },"a")
       .from("#profession-name", {
@@ -37,22 +40,20 @@ const Hero = () => {
       <div className="content">
         <div id="profession-name">
           <h2>
-            {/* <span>I am a Web</span>  */}
+            {/* <span>I am a </span>  */}
             <span>Web Developer</span>
             {/* <br />
             <span >& Designer</span> */}
           </h2>
         </div>
-        {/* TODO: combine title and profession-name */}
 
-        <div className="background">
-          {/* <Opulento /> */}
+        <div className="live-background-gradient">
           <Velustro />
         </div>
 
         <div id="spline-3d-cube">
           <Suspense fallback={<Loading />}>
-            <Spline scene="https://prod.spline.design/ahHbM7Vca6gxi9Ue/scene.splinecode" />
+            <SplineBox />
           </Suspense>
         </div>
       </div>

@@ -26,7 +26,8 @@ const NavBar = () => {
     gsap.from("#nav-bar", {
       y: -95,
       duration: 0.7,
-      delay: 0.9,
+      delay: 1,
+      ease: "power1.inOut"
     });
   });
 
@@ -101,9 +102,9 @@ const NavBar = () => {
     }
   }, [open]);
 
-  const handleMenuToggle = () => {
+  const handleMenuOpen = () => {
     if (isAnimating) return; // Prevent multiple clicks during animation
-    setOpen(!open);
+    setOpen(true);
   };
 
   const handleMenuClose = () => {
@@ -126,7 +127,7 @@ const NavBar = () => {
               <NavLink
                 key={link.label}
                 className={({ isActive }) =>
-                  `${isActive ? "text-white" : "text-zinc-400"} transition-all duration-300 hover:scale-130 hover:text-white`
+                  `${isActive ? "text-white" : "text-zinc-400"}`
                 }
 
                 to={link.href}
@@ -152,7 +153,7 @@ const NavBar = () => {
             </button>
           ) : (
             <button
-              onClick={handleMenuToggle}
+              onClick={handleMenuOpen}
               className="toggle-menu-btn"
             >
               <p className="text-white">Menu</p>
