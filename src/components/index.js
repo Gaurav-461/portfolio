@@ -4,8 +4,8 @@ import Loading from "./Loading.jsx";
 import ElasticSvgLine from './ElasticSvgLine.jsx'
 import Projects from "./Projects.jsx";
 import Footer from "./Footer.jsx";
-import CircularBillBoard from "./showProjects/CircularBillBoard.jsx";
-import Cylinder from "./showProjects/Cylinder.jsx";
+import CircularBillBoard from "./3dModel/CircularBillBoard.jsx";
+import Cylinder from "./3dModel/Cylinder.jsx";
 import About from "./About.jsx";
 import Contact from "./Contact.jsx";
 import  Button from "./Button.jsx";
