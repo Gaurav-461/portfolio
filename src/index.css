@@ -12,13 +12,6 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.screen-max-width {
-  margin-inline-start: auto;
-  margin-inline-end: auto;
-  position: relative;
-  max-width: 1120px;
-}
-
 @utility text-gradient {
   background-image: linear-gradient(
     0deg,
@@ -30,21 +23,6 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-@utility bg-blur {
-  background-color: #2a2a2a;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  /* border: 1px solid rgba(255, 255, 255, 0.18); */
-}
-@utility bg-blur-log {
-  /* background: rgba(255, 255, 255, 0); */
-  background-color: rgba(211, 211, 211, 0.34);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
 ::-webkit-scrollbar {
   width: 10px;
   border-radius: 10px;
@@ -52,24 +30,20 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #101010;
+  background: #000;
   /* background: transparent;  */
   /* background: theme('bg-primary'); */
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  /* border-radius: 10px; */
   background: #383838;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #232323;
-}
-
-@utility nav-height {
-  @apply h-[calc(100vh-49px)];
 }
 
 @utility flex-center {
@@ -122,8 +96,9 @@ body {
       }
     }
 
+    /* mobile menu */
     .menu {
-      @apply fixed top-20 left-4.5 mx-auto h-96 w-[90%] overflow-hidden rounded-2xl bg-white/15 ring-1 ring-white/20 backdrop-blur-2xl sm:top-32;
+      @apply fixed top-20 left-4.5 mx-auto h-96 w-[90%] overflow-hidden rounded-2xl bg-white ring-1 ring-white/20 backdrop-blur-2xl sm:top-32;
 
       ul {
         @apply flex h-full flex-col items-center justify-center gap-10 text-5xl font-light;
@@ -132,12 +107,12 @@ body {
   }
 
   #hero {
-    @apply relative w-full overflow-hidden;
-    @apply max-sm:pt-8; /* test padding for gradient background container in mobile*/
+    @apply relative w-full pt-6;
+    @apply sm:pt-0; /* test padding for gradient background container in mobile*/
 
     .title {
-      @apply absolute top-40 z-10 w-full text-center;
-      @apply max-sm:left-10 max-sm:w-[80%] max-sm:overflow-hidden max-sm:rounded-lg;
+      @apply absolute top-40 w-full text-center;
+      @apply max-sm:left-10 max-sm:w-[80%] max-sm:overflow-hidden max-sm:rounded-lg max-md:z-20;
 
       h1 {
         @apply text-4xl leading-snug font-light text-white;
@@ -155,30 +130,31 @@ body {
 
       #profession-name {
         @apply pointer-events-none z-10;
-        @apply max-sm:left-10 max-sm:w-[80%] max-sm:overflow-hidden max-sm:rounded-lg max-sm:p-1 max-sm:backdrop-blur-2xl md:mix-blend-difference;
+        @apply max-sm:w-[80%] max-sm:overflow-hidden max-sm:rounded-lg max-sm:p-1 md:mix-blend-difference max-sm:pt-18;
 
         h2 {
           @apply text-5xl font-light text-white;
           @apply max-sm:text-center;
           @apply sm:text-6xl sm:font-extralight;
           @apply md:text-gradient md:text-8xl ;
-          @apply lg:text-9xl;
+          @apply lg:text-9xl ;
         }
       }
 
       /* Mobile background */
-      .background {
-        @apply absolute mx-auto h-[70%] w-[90%] overflow-hidden rounded-2xl md:hidden;
+      .live-background-gradient {
+        @apply absolute mx-auto h-[80%] w-[90%] overflow-hidden rounded-2xl bg-gradient-to-b from-black to-gray-600 md:hidden;
       }
 
       #spline-3d-cube {
-        @apply absolute h-[80%] w-full;
+        @apply absolute w-full h-[90%] mb-20;
         @apply max-md:hidden;
       }
     }
   }
 
   #projects {
+    @apply lg:w-5xl mx-auto;
     .projects-title {
       @apply text-gradient p-2 text-center text-5xl;
     }
@@ -189,7 +165,9 @@ body {
   }
 
   #about {
-    @apply relative mt-10 flex h-full w-full flex-col items-center justify-between gap-8 px-8 text-white sm:flex-row md:mt-30 md:items-start;
+    @apply relative mt-10 flex h-full w-full flex-col items-center justify-between gap-8 px-8 text-white ;
+    
+    @apply sm:flex-row md:mt-30 md:items-start;
 
     .profile-img {
       @apply w-full max-w-2xs overflow-hidden rounded-4xl;
@@ -199,7 +177,7 @@ body {
       @apply flex w-full flex-col justify-between gap-4 max-sm:items-center sm:min-h-96;
 
       p {
-        @apply text-xl/8 font-light text-balance text-white md:text-3xl;
+        @apply text-xl/8 font-light text-white md:text-3xl will-change-transform;
       }
     }
   }
